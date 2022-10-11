@@ -4,10 +4,11 @@ export function PaymentPage() {
   const [totalAmount, setTotalAmount] = useState("");
   const [paymentMethodNumber1, setPaymentMethodNumber1] = useState("");
 
-  function handleInput(event) {
-    console.log(event.target.value);
+  function handleTotalAmount(event) {
     setTotalAmount(event.target.value);
+    console.log("setTotalAmount");
     setPaymentMethodNumber1(totalAmount);
+    console.log(paymentMethodNumber1)
    
   }
 
@@ -25,7 +26,7 @@ export function PaymentPage() {
           <label>Total amount to pay </label>
           <input
             type="text"
-            onChange={handleInput}
+            onChange={handleTotalAmount}
             value={totalAmount}
             placeholder="Total amount"
           ></input>
