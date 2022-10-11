@@ -1,12 +1,11 @@
 import { useState } from "react";
 
-export function PaymentPage(props) {
+export function PaymentPage() {
   const [totalAmount, setTotalAmount] = useState("");
   const [paymentMethodNumber1, setPaymentMethodNumber1] = useState("");
 
   function handleInput(event) {
     console.log(event.target.value);
-    console.log(props)
     setTotalAmount(event.target.value);
     setPaymentMethodNumber1(totalAmount);
    
