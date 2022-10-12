@@ -1,25 +1,44 @@
 import "./paymentpage.scss";
 import { useState } from "react";
 
+const count = 3;
+
+export function numberUpTo2decimals(num) {
+  return parseFloat(num.toFixed(2));
+}
+
 export function PaymentPage() {
   const [totalAmount, setTotalAmount] = useState("");
-  const [paymentMethodNumber1, setPaymentMethodNumber1] = useState("");
-  const [paymentMethodNumber2, setPaymentMethodNumber2] = useState("");
+  const [paymentMethods, setPaymentMethods] = useState([]);
 
   function handleTotalAmount(event) {
-    setTotalAmount(event.target.value);
-    setPaymentMethodNumber1(event.target.value / 2);
-    setPaymentMethodNumber2(event.target.value / 2);
+    const methodValue = numberUpTo2decimals(event.target.value / count);
+    setTotalAmount(+event.target.value);
+    setPaymentMethods([...new Array(count)].fill(methodValue));
   }
 
-  function handlePaymentMethodNumber1(event) {
-    setPaymentMethodNumber1(event.target.value);
-    setPaymentMethodNumber2(totalAmount - event.target.value);
-  }
+  function handlePaymentMethod(event, fieldIndex) {
+    const fieldValue = +event.target.value;
 
-  function handlePaymentMethodNumber2(event) {
-    setPaymentMethodNumber2(event.target.value);
-    setPaymentMethodNumber1(totalAmount - event.target.value);
+    setPaymentMethods((oldAmounts) => {
+      //change the field value
+
+      const newAmounts = [...oldAmounts];
+      newAmounts[fieldIndex] = fieldValue;
+
+      //Change the other field values
+
+        const evenValue = (totalAmount - fieldValue) / (count - 1);
+
+        newAmounts.forEach((field, index) => {
+          if (index !== fieldIndex) {
+            newAmounts[index] = evenValue;
+          }
+        });
+      
+
+      return newAmounts;
+    });
   }
 
   return (
@@ -30,10 +49,11 @@ export function PaymentPage() {
         </div>
         <div className="totalAmountContainer">
           <div className="totalAmountCard">
-            <label>Total amount to pay:</label>
+            <label htmlFor="Total amount to pay">Total amount to pay:</label>
             <input
               className="totalAmountInput"
               type="text"
+              id="Total amount to pay"
               onChange={handleTotalAmount}
               value={totalAmount}
               placeholder="Total amount"
@@ -41,26 +61,27 @@ export function PaymentPage() {
           </div>
         </div>
         <div className="paymentMethodContainer">
-          <div className="paymentMethodNumber1">
-            <label>Payment method number 1: </label>
-            <input
-              className="paymentMethodNumber1Input"
-              type="text"
-              onChange={handlePaymentMethodNumber1}
-              placeholder="Payment method number 1"
-              value={paymentMethodNumber1}
-            ></input>
-          </div>
-          <div className="paymentMethodNumber2">
-            <label>Payment method number 2: </label>
-            <input
-              className="paymentMethodNumber2Input"
-              type="text"
-              value={paymentMethodNumber2}
-              onChange={handlePaymentMethodNumber2}
-              placeholder="Payment method number 2"
-            ></input>
-          </div>
+          {[...new Array(count)].map((item, i) => {
+            console.log(paymentMethods[i],totalAmount,paymentMethods[i]>totalAmount,typeof paymentMethods[i]);
+            return (
+              <div key={i} className="paymentMethodNumber1">
+                <label htmlFor="Payment method type amount">
+                  Payment method number {i + 1}:{" "}
+                </label>
+                <input
+                  className="paymentMethodNumber1Input"
+                  type="text"
+                  id="Payment method type amount"
+                  onChange={(event) => handlePaymentMethod(event, i)}
+                  placeholder={`Payment method number${i + 1}`}
+                  value={paymentMethods[i]}
+                ></input>
+                {paymentMethods[i]<0 ? <p>Number can't be negative</p>:null}
+                {paymentMethods[i]>totalAmount ? <p>Cannot be bigger than the total amount</p>:null}
+                { isNaN(paymentMethods[i])  ? <p>Please enter a number value</p>:null}
+              </div>
+            );
+          })}
         </div>
       </form>
     </div>

@@ -1,16 +1,11 @@
-import './App.css';
-import { PaymentPage } from './components/PaymentPage';
-import { PaymentPageNew } from './components/PaymentPageNew';
-
+import "./App.css";
+import { PaymentPage } from "./components/PaymentPage";
 
 function App() {
   return (
     <div className="App">
       <div className="wrapper">
-      <PaymentPageNew />
         <PaymentPage />
-       
-
       </div>
     </div>
   );
