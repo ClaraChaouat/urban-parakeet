@@ -1,20 +1,19 @@
 import "./paymentpage.scss";
 import { useState } from "react";
 
-const count = 3;
 
 export function numberUpTo2decimals(num) {
   return parseFloat(num.toFixed(2));
 }
 
-export function PaymentPage() {
+export function PaymentPage(props) {
   const [totalAmount, setTotalAmount] = useState("");
   const [paymentMethods, setPaymentMethods] = useState([]);
 
   function handleTotalAmount(event) {
-    const methodValue = numberUpTo2decimals(event.target.value / count);
+    const methodValue = numberUpTo2decimals(event.target.value / props.count);
     setTotalAmount(+event.target.value);
-    setPaymentMethods([...new Array(count)].fill(methodValue));
+    setPaymentMethods([...new Array(props.count)].fill(methodValue));
   }
 
   function handlePaymentMethod(event, fieldIndex) {
@@ -28,7 +27,7 @@ export function PaymentPage() {
 
       //Change the other field values
 
-      const evenValue = (totalAmount - fieldValue) / (count - 1);
+      const evenValue = (totalAmount - fieldValue) / (props.count - 1);
 
       newAmounts.forEach((field, index) => {
         if (index !== fieldIndex) {
@@ -60,7 +59,7 @@ export function PaymentPage() {
           </div>
         </div>
         <div className="paymentMethodsContainer">
-          {[...new Array(count)].map((item, i) => {
+          {[...new Array(props.count)].map((item, i) => {
             return (
               <div key={i} className="paymentMethods">
                 <label htmlFor="Payment method type amount">

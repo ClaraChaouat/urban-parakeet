@@ -5,7 +5,7 @@ function App() {
   return (
     <div className="App">
       <div className="wrapper">
-        <PaymentPage />
+        <PaymentPage count={3} />
       </div>
     </div>
   );
