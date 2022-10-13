@@ -1,8 +1,8 @@
 # Payment page:credit_card::money_with_wings:
 ## Description::woman_teacher:
-The aim of this project is to build a payment page
-The user enters a number in the total amount field.
-The value entered is equally divided by the number of the payment methods.
+The aim of this project is to build a payment page.\
+The user enters a number in the total amount field.\
+The value entered is equally divided by the number of the payment methods.\
 If one of the payment methods value changes, the others will be automatically modified in order for the total of the payment methods to be equal to the total amount.
 
 Option: 
