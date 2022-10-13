@@ -44,24 +44,31 @@ input {
   font-family: $primaryFontFamily;
 }
 
-.paymentMethodContainer {
+.paymentMethodsContainer {
   display: flex;
   justify-content: center;
   gap: 20px;
   padding-bottom: 300px;
   padding-top: 100px;
   flex-wrap: wrap;
+  margin: 0 5px
 }
 
-.paymentMethodNumber1,
-.paymentMethodNumber2 {
+.paymentMethods {
+  font-size: 18px;
+  font-family: $primaryFontFamily;
   font-weight: 600;
 }
 
-.paymentMethodNumber1Input,
-.paymentMethodNumber2Input {
-  font-size: 15px;
-  font-family: $primaryFontFamily;
+.paymentMethodsInput {
+  font-size: 18px;
+}
+
+.paymentMethodinputError {
+  margin-top: 10px;
+  font-size: 13px;
+  color: red;
+  font-weight: 500;
 }
 
 @media #{$medium-screen} {
@@ -73,3 +80,5 @@ input {
     font-size: 16px;
   }
 }
+
+
