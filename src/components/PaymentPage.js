@@ -1,7 +1,6 @@
 import "./paymentpage.scss";
 import { useState } from "react";
 
-
 export function numberUpTo2decimals(num) {
   return parseFloat(num.toFixed(2));
 }
@@ -43,15 +42,15 @@ export function PaymentPage(props) {
     <div className="paymentPageContainer">
       <form className="paymentForm">
         <div className="paymentFormTitle">
-          <p>Payment</p>
+          <h1>Payment</h1>
         </div>
         <div className="totalAmountContainer">
           <div className="totalAmountCard">
-            <label htmlFor="Total amount to pay">Total amount to pay:</label>
+            <label htmlFor="Total-amount-to-pay">Total amount to pay:</label>
             <input
               className="totalAmountInput"
               type="number"
-              id="Total amount to pay"
+              id="Total-amount-to-pay"
               onChange={handleTotalAmount}
               value={totalAmount}
               placeholder="Total amount"
@@ -62,16 +61,16 @@ export function PaymentPage(props) {
           {[...new Array(props.count)].map((item, i) => {
             return (
               <div key={i} className="paymentMethods">
-                <label htmlFor="Payment method type amount">
+                <label htmlFor={`method${i}`}>
                   Payment method number {i + 1}:{" "}
                 </label>
                 <input
                   className="paymentMethodsInput"
                   type="number"
-                  id="Payment method type amount"
+                  id={`method${i}`}
                   onChange={(event) => handlePaymentMethod(event, i)}
                   placeholder={`Payment number ${i + 1}`}
-                  value={paymentMethods[i]}
+                  value={paymentMethods[i] || ""}
                 ></input>
                 {paymentMethods[i] < 0 ? (
                   <p className="paymentMethodinputError">
